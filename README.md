@@ -4,7 +4,7 @@
 [![Azure](https://img.shields.io/badge/Azure-Cloud-blue.svg)](https://azure.microsoft.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-A production-ready Terraform project demonstrating Infrastructure as Code (IaC) best practices for deploying AI-powered applications on Microsoft Azure.
+A production-style Terraform reference implementation demonstrating Infrastructure as Code (IaC) best practices for deploying an Azure OpenAI-backed API on Microsoft Azure.
 
 ## 🏗️ Architecture
 
@@ -62,6 +62,7 @@ A production-ready Terraform project demonstrating Infrastructure as Code (IaC) 
 - [Terraform](https://www.terraform.io/downloads) >= 1.0
 - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 - Azure subscription with OpenAI access enabled
+- State & secrets: This repository uses Terraform to provision a Key Vault secret for demonstration purposes. Terraform state must be treated as sensitive (use remote state with proper access control). For production, consider alternative secret injection patterns.
 
 ### Deployment
 

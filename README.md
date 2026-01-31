@@ -123,7 +123,7 @@ curl -X POST https://<app-name>.azurewebsites.net/api/chat \
 | Development | ~$50-100 |
 | Production  | ~$200-500 |
 
-*Costs vary based on usage. Azure OpenAI is billed per token.*
+*Rough estimates assuming low-to-moderate usage. Azure OpenAI costs are token-based and can vary significantly depending on usage patterns. Use the [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/) for accurate estimates.*
 
 ## 🔐 Security Features
 

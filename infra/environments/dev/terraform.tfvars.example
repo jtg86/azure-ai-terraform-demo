@@ -1,5 +1,21 @@
 # Example terraform.tfvars for dev environment
 # Copy this file to terraform.tfvars and customize values
+#
+# Note: Most resources use opinionated defaults. Only location variables
+# are typically required to be set explicitly.
 
-location         = "norwayeast"
-openai_location  = "swedencentral"  # OpenAI has limited region availability
+# Azure region for most resources (App Service, Key Vault, etc.)
+location = "norwayeast"
+
+# Azure region for OpenAI - limited availability, check:
+# https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#model-summary-table-and-region-availability
+openai_location = "swedencentral"
+
+# Available OpenAI regions (as of 2024):
+# - swedencentral (recommended for Norway)
+# - westeurope
+# - eastus, eastus2
+# - canadaeast
+# - australiaeast
+# - japaneast
+# - uksouth

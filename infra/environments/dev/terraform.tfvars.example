@@ -1,0 +1,5 @@
+# Example terraform.tfvars for dev environment
+# Copy this file to terraform.tfvars and customize values
+
+location         = "norwayeast"
+openai_location  = "swedencentral"  # OpenAI has limited region availability

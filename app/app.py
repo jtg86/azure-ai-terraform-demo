@@ -41,32 +41,38 @@ def get_credential():
 
 
 @lru_cache(maxsize=1)
+def get_openai_api_key() -> str:
+    """
+    Retrieve OpenAI API key from Azure Key Vault.
+    Uses managed identity for Key Vault access.
+    """
+    if not AZURE_KEYVAULT_URL:
+        raise RuntimeError("AZURE_KEYVAULT_URL environment variable is not set")
+    
+    credential = get_credential()
+    client = SecretClient(vault_url=AZURE_KEYVAULT_URL, credential=credential)
+    secret = client.get_secret("openai-api-key")
+    
+    logger.info("Successfully retrieved OpenAI API key from Key Vault")
+    return secret.value
+
+
+@lru_cache(maxsize=1)
 def get_openai_client() -> AzureOpenAI:
     """
     Create and cache Azure OpenAI client.
-    Uses managed identity for authentication.
+    Uses API key retrieved from Key Vault.
     """
-    credential = get_credential()
-    
-    # Get token for Azure OpenAI
-    token = credential.get_token("https://cognitiveservices.azure.com/.default")
+    api_key = get_openai_api_key()
     
     client = AzureOpenAI(
         azure_endpoint=AZURE_OPENAI_ENDPOINT,
-        api_key=token.token,
+        api_key=api_key,
         api_version=API_VERSION,
     )
     
     logger.info("Azure OpenAI client initialized")
     return client
-
-
-def get_secret_from_keyvault(secret_name: str) -> str:
-    """Retrieve a secret from Azure Key Vault."""
-    credential = get_credential()
-    client = SecretClient(vault_url=AZURE_KEYVAULT_URL, credential=credential)
-    secret = client.get_secret(secret_name)
-    return secret.value
 
 
 @app.route("/health")
